@@ -3,53 +3,56 @@ using System.Collections;
 
 public class PlaneActivate : MonoBehaviour {
 
-	public float angle;
+	public float curAngle = 0.0f;
+	private float triggerDegrees = 10.0f;
+	private float bufferDegrees = 5.0f;
+	private float lastTransitionAngle = 0.0f;
+	private float differenceDegrees = 0.0f;
 
-	public Transform p1;
-	public Transform p2;
-	public Transform p3;
-	public Transform p4;
-	public Transform p5;
 
-	private float initOffset = 5.0f;
-	private float offset = 10.0f;
-	private float y5;
-	private float y10;
-	private float y15;
-	private float y20;
-	private float y25;
+	public Transform curFramePlane;
+	public Transform nextFramePlane;
+	public Transform transFramePlane;
+	
+	private const int frameCount = 5;
+	private Texture2D[] frames; 
+
+	private bool isUpdating = false;
+	private enum TransitionDirection {advancing, retreating};
+	private TransitionDirection updateDirection;
 
 	// Use this for initialization
 	void Start () {
-		y5 = initOffset;
-		y10 = y5 + offset;
-		y15 = y10 + offset;
-		y20 = y15 + offset;
-		y25 = y20 + offset;
+		// init frames array and fill wth Texture2D objects of frames of the video
+		Texture2D[] frames = new Texture2D[frameCount];
+		for (int i = 0; i < frameCount; i++) {
+
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
+//		p1.gameObject.SetActive(true);
+		curAngle = transform.eulerAngles.y;
+		differenceDegrees = curAngle - lastTransitionAngle;
+		Debug.Log (curAngle);
 
-//		angle = transform.rotation.y;
-		angle = transform.eulerAngles.y;
-		Debug.Log (angle); 
-		if (angle >= y5 && angle < y10) {
-			p1.gameObject.SetActive(false); 
-			p2.gameObject.SetActive(true); 
-		} else if (angle >= y10 && angle < y15) {
-			p2.gameObject.SetActive(false); 
-			p3.gameObject.SetActive(true); 
-		} else if (angle >= y15 && angle < y20) {
-			p3.gameObject.SetActive(false); 
-			p4.gameObject.SetActive(true); 
-		} else if (angle >= y20 && angle < y25) {
-			p4.gameObject.SetActive(false); 
-			p5.gameObject.SetActive(true); 
-		} 
-
-		if (angle < y5) { 
-			p1.gameObject.SetActive(true);
+		// transition animation
+		if (isUpdating) {
+			
 		}
+
+		// decide whether to trigger
+		else if (Mathf.Abs (differenceDegrees) > triggerDegrees) {
+//			isUpdating = true;
+			if (differenceDegrees < 0.0f) {
+				updateDirection = TransitionDirection.retreating;
+			} else {
+				updateDirection = TransitionDirection.advancing;
+			}
+		}
+
 	}
+
+	// ask bryan about animation paradigm - just adjust completion amount on each update?
 }
