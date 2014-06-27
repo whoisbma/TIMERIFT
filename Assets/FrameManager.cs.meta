@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4222a7c72bef84aeda5da3b8799bda80
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - curFramePlane: {instanceID: 0}
+  - nextFramePlane: {instanceID: 0}
+  - transFramePlane: {instanceID: 0}
+  - curFrameMat: {fileID: 2100000, guid: 2b9f55403385940d9b3e3a8f62a265dc, type: 2}
+  - nextFrameMat: {fileID: 2100000, guid: 2839fd00d6b9f46c2b57cb0507a7c9b6, type: 2}
+  - shutterMat: {fileID: 2100000, guid: 672c40c36944049d18d48441ec378ee8, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
